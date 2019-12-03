@@ -1,7 +1,5 @@
-package Servlets;
+package servlets;
 
-import Servlets.HelloServlet;
-import Servlets.LoginServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 
