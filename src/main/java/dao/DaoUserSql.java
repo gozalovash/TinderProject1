@@ -1,7 +1,7 @@
 package dao;
 
 import com.sun.tools.javac.util.List;
-import dto.User;
+import models.User;
 
 import java.sql.Connection;
 
