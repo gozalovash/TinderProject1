@@ -8,9 +8,11 @@ import java.sql.Connection;
 public class DaoUserSql implements Dao<User> {
     private Connection connection;
 
+
     public DaoUserSql(Connection connection) {
         this.connection = connection;
     }
+
 
     @Override
     public User get(int id) {
