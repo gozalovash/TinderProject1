@@ -5,8 +5,7 @@ import java.util.Map;
 
 public class AuthService implements Auth{
     Map<String, String> Users=new HashMap<>();
-    public AuthService(){
-        Users.put("user", "123");
+    public AuthService(){ Users.put("user", "123");
     }
 
     @Override
