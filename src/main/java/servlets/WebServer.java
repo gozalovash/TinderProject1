@@ -9,8 +9,8 @@ public class WebServer {
         BasicConfigurator.configure();
         Server server =new Server(8082);
         ServletContextHandler handler=new ServletContextHandler();
-        handler.addServlet(UsersServlet.class,"/users");
-        handler.addServlet(LoginServlet.class, "/*");
+        handler.addServlet(UsersServlet.class,"/users/*");
+        handler.addServlet(LoginServlet.class, "/login/*");
 
         server.setHandler(handler);
         server.start();

@@ -30,9 +30,15 @@ public class DaoUserSql implements Dao<User> {
     }
 
     @Override
-    public void delete(User item) {
+    public void delete(int id) {
 
     }
+
+    /*@Override
+    public void delete(User item) {
+
+    }*/
+    // for Lala: either make it delete with int here or change at Dao part to "User item" to avoid errors
 
     @Override
     public void update(User item) {
