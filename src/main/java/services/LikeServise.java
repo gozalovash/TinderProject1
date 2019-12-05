@@ -53,9 +53,10 @@ public class LikeServise {
                 .collect(Collectors.toList());
     }
     public User otherUsers(int otherUserId){
-      User user =daoUserSql.getOtherUsers(otherUserId);
+      User otherUsers =daoUserSql.getOtherUsers(otherUserId);
       //implement
-        return user;
+        return otherUsers;
+
     }
 
 }
