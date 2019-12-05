@@ -1,9 +1,9 @@
 package dao;
 
-import com.sun.tools.javac.util.List;
 import models.User;
 
 import java.sql.Connection;
+import java.util.List;
 
 public class DaoUserSql implements Dao<User> {
     private Connection connection;

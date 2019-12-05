@@ -1,9 +1,9 @@
 package dao;
 
-import com.sun.tools.javac.util.List;
 import models.Like;
 
 import java.sql.Connection;
+import java.util.List;
 
 public class DaoLikedSql implements Dao<Like> {
     private Connection connection;
