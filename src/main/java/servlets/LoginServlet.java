@@ -34,9 +34,12 @@ public class LoginServlet extends HttpServlet {
 
         System.out.println(user_name);
         System.out.println(user_password);
-        try(PrintWriter w = resp.getWriter()) {
+
+        resp.sendRedirect("http://localhost:8080/users");
+        /*tryPrintWriter w = resp.getWriter()) {
             w.println("LoginServlet.POST");
-            w.printf("user:%s %s\n",user_name, checked ? "logged in successfully" : "login failed");
-        };//will be changed later-- redirect to users page
-    }
+            w.printf("user:%s %s\n",user_name, checked ? "logged in successfully" : "login failed");*/
+
+        };//will be changed later-- redirect to users servlet
+
 }
