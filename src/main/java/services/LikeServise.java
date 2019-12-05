@@ -3,6 +3,7 @@ package services;
 import dao.DaoLikedSql;
 import dao.DaoUserSql;
 import freemarker.ext.servlet.FreemarkerServlet;
+import models.Like;
 import utils.FreeMaker;
 
 import javax.servlet.http.HttpServlet;
@@ -28,8 +29,19 @@ public class LikeServise {
         this.connection = connection;
         this.response = response;
         this.request = request;
-        this.daoUserSql= new DaoUserSql(connection);
-        this.likedSql= new DaoLikedSql(userId,connection);
+        this.daoUserSql = new DaoUserSql(connection);
+        this.likedSql = new DaoLikedSql(userId, connection);
+    }
+
+    public void addLike(Like like) {
+        if (likedSql.get(like.getLikedUserId()) == null) {
+            likedSql.save(like);
+        }
+    }
+    public  void deleteLike(Like like){
+        if(likedSql.get(like.getLikedUserId())!=null){
+            likedSql.delete(like.getLikedUserId());
+        }
     }
 
 }
