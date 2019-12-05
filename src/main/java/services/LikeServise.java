@@ -4,11 +4,14 @@ import dao.DaoLikedSql;
 import dao.DaoUserSql;
 import freemarker.ext.servlet.FreemarkerServlet;
 import models.Like;
+import models.User;
 import utils.FreeMaker;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LikeServise {
     private int userId;
@@ -38,10 +41,21 @@ public class LikeServise {
             likedSql.save(like);
         }
     }
-    public  void deleteLike(Like like){
-        if(likedSql.get(like.getLikedUserId())!=null){
+
+    public void deleteLike(Like like) {
+        if (likedSql.get(like.getLikedUserId()) != null) {
             likedSql.delete(like.getLikedUserId());
         }
+    }
+
+    public List<User> getLikedUsers(List<Like> likes) {
+        return likes.stream().map(l -> daoUserSql.get(l.getLikedUserId()))
+                .collect(Collectors.toList());
+    }
+    public User otherUsers(int otherUserId){
+      User user =daoUserSql.getOtherUsers(otherUserId);
+      //implement
+        return user;
     }
 
 }

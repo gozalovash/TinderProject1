@@ -2,6 +2,7 @@ package models;
 
 public class User {
     private int userId;
+    private String nickName;
     private String userName;
     private String userSurname;
     private String password;
@@ -31,6 +32,14 @@ public class User {
         return userSurname;
     }
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -50,8 +59,9 @@ public class User {
     public User() {
     }
 
-    public User(int userId, String userName, String userSurname, String password, String photoUrl) {
+    public User(int userId, String nickName, String userName, String userSurname, String password, String photoUrl) {
         this.userId = userId;
+        this.nickName = nickName;
         this.userName = userName;
         this.userSurname = userSurname;
         this.password = password;
@@ -61,11 +71,12 @@ public class User {
     @Override
     public String toString() {
         return "User{ Id: " + userId
+                + " Nickname :" + nickName
                 + " Name: " + userSurname
                 + " Surname: " + userSurname
                 + " Password: " + password
                 + " Photo Url: " + photoUrl
-                +"}";
+                + "}";
 
     }
 }
