@@ -9,7 +9,6 @@ public class User {
     private String photoUrl;
 
 
-
     public void setUserId(int userId) {
         this.userId = userId;
     }
@@ -61,6 +60,14 @@ public class User {
     public User() {
     }
 
+    public User(String nickName, String userName, String surname, String password, String photoUrl) {
+        this.nickName = nickName;
+        this.userName = userName;
+        this.userSurname = surname;
+        this.password = password;
+        this.photoUrl = photoUrl;
+    }
+
     public User(int userId, String nickName, String userName, String userSurname, String password, String photoUrl) {
         this.userId = userId;
         this.nickName = nickName;
@@ -69,10 +76,20 @@ public class User {
         this.password = password;
         this.photoUrl = photoUrl;
     }
+
     public User(String nickName, String password) {
-        this.userName=nickName;
-        this.password=password;
+        this.userName = nickName;
+        this.password = password;
     }
+
+    public User(int userId, String nickName, String userName, String surname, String imgUrl) {
+        this.userId = userId;
+        this.nickName = nickName;
+        this.userName = userName;
+        this.userSurname = surname;
+        this.photoUrl = imgUrl;
+    }
+
     @Override
     public String toString() {
         return "User{ Id: " + userId
