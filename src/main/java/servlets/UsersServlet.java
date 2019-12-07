@@ -16,6 +16,7 @@ public class UsersServlet extends HttpServlet {
         Path path = Paths.get("./content/user.html");
         ServletOutputStream os = resp.getOutputStream();
         Files.copy(path, os);
+        //it should display all users counting from database, with FREEMARKER
     }
 
     @Override
@@ -23,8 +24,10 @@ public class UsersServlet extends HttpServlet {
         //Path path = Paths.get("./content/user.html");
         //req.getParameter()
         //PrintWriter writer =resp.getWriter();
-        //writer.println("HelloWorld.POST");
+        //writer.println("UserServlet.POST");
         //writer.close();
         //resp.sendRedirect("localhost/content/user.html");
+        resp.sendRedirect("http://localhost:8082/liked");
+
     }
 }

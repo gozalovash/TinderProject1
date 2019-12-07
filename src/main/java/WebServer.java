@@ -1,5 +1,3 @@
-package servlets;
-
 import dbconnection.DbConnection;
 import filters.LoginFilter;
 import org.apache.log4j.BasicConfigurator;
@@ -18,12 +16,12 @@ public class WebServer {
     public static void main(String[] args) throws Exception {
         BasicConfigurator.configure();
         Server server = new Server(8082);
-        Connection connection = DbConnection.getConnection();
+        //Connection connection = DbConnection.getConnection();
         ServletContextHandler handler = new ServletContextHandler();
         //handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
        // handler.addServlet(new ServletHolder(new LoginServlet(connection)), "/login/*");
-       // handler.addServlet(new ServletHolder(new LikeServlet(connection)), "/liked/*");
-       // handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/message/*");
+       // handler.addServlet(new ServletHolder(new LikedServlet(connection)), "/liked/*");
+       // handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
 
 
      //   HandlerCollection handlerCollection = new HandlerCollection();
