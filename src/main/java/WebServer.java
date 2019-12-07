@@ -33,19 +33,15 @@ public class WebServer {
         // handler.addServlet(new ServletHolder(new LikedServlet(connection)), "/liked/*");
         // handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
 
-
         //   HandlerCollection handlerCollection = new HandlerCollection();
-
         /// handler.addFilter(new FilterHolder(new RegistrationFilter(connection)),"/reg/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
         // handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
         // handlerCollection.setHandlers(new Handler[] { handler});
         //  server.setHandler(handlerCollection);
 
-
         server.setHandler(handler);
         server.start();
         server.join();
-
 
     }
 }
