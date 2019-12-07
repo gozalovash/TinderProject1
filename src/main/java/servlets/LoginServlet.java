@@ -1,7 +1,10 @@
 package servlets;
 
+import cookies.CookiesService;
 import filters.LoginFilter;
+import models.User;
 import service.Auth;
+import services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -20,6 +23,8 @@ public class LoginServlet extends HttpServlet {
     /*public LoginServlet(Auth auth) {
         this.auth = auth;
     }*/
+    private CookiesService cookiesService;
+    private UserService userService;
 
 
     @Override
@@ -32,13 +37,16 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user_name = req.getParameter("user_name");
-        String user_password = req.getParameter("user_passwd");
+        String user_password = req.getParameter("user_password");
+        User user = new User(user_name,user_password);
+
+
+        cookiesService.saveCookies(userService.getLogin(user));
         //boolean checked = auth.check(user_name, user_password);
+        //System.out.println(user_name);
+      //  System.out.println(user_password);
 
-        System.out.println(user_name);
-        System.out.println(user_password);
-
-        resp.sendRedirect("http://localhost:8082/users");
+        resp.sendRedirect("/users");  //does not need to localhost:8082
         /*try (PrintWriter w = resp.getWriter()) {
             w.println("LoginServlet.POST");
             w.printf("user:%s %s\n", user_name,user_password);
