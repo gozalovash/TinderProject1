@@ -25,7 +25,7 @@ public class FreeMaker {
                     setWrapUncheckedExceptions(true);
 
                 } catch (IOException e) {
-                    throw new IllegalStateException("Something went wrong , freemaker");
+                    throw new IllegalStateException("Something went wrong , freemarker");
                 }
             }
 
@@ -42,6 +42,6 @@ public class FreeMaker {
 
     }
     public FreeMaker(){
-        this("html/file/path"); // to correct
+        this("content/user.html"); // to correct
     }
 }
