@@ -1,20 +1,18 @@
 package utils;
 
 
-import freemarker.core.ParseException;
 import freemarker.template.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-public class FreeMaker {
+public class FreeMarker {
     private Configuration configuration;
 
-    public FreeMaker(final String path) {
+    public FreeMarker(final String path) {
         this.configuration = new Configuration(Configuration.VERSION_2_3_28) {
             {
                 try {
@@ -41,7 +39,7 @@ public class FreeMaker {
         }
 
     }
-    public FreeMaker(){
+    public FreeMarker(){
         this("content/user.html"); // to correct
     }
 }

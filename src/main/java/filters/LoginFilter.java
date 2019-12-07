@@ -4,7 +4,7 @@ import dao.DaoUserSql;
 import models.User;
 import org.eclipse.jetty.http.HttpMethod;
 import services.UserService;
-import utils.FreeMaker;
+import utils.FreeMarker;
 import utils.FromRequest;
 
 import javax.servlet.*;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class LoginFilter implements Filter {
     private UserService userService;
-    private FreeMaker freeMaker = new FreeMaker();
+    private FreeMarker freeMaker = new FreeMarker();
     private final Connection connection;
     HashMap<String, Object> userData = new HashMap<>();
 
