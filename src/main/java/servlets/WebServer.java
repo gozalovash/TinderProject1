@@ -31,7 +31,7 @@ public class WebServer {
        /// handler.addFilter(new FilterHolder(new RegistrationFilter(connection)),"/reg/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
        // handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
        // handlerCollection.setHandlers(new Handler[] {jsHandler, handler});
-
+      //  server.setHandler(handlerCollection);
 
 
         server.setHandler(handler);
