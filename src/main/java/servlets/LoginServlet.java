@@ -2,6 +2,7 @@ package servlets;
 
 import filters.LoginFilter;
 import service.Auth;
+import services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -38,14 +39,15 @@ public class LoginServlet extends HttpServlet {
         System.out.println(user_name);
         System.out.println(user_password);
 
-        resp.sendRedirect("http://localhost:8082/users");
-        /*try (PrintWriter w = resp.getWriter()) {
-            w.println("LoginServlet.POST");
-            w.printf("user:%s %s\n", user_name,user_password);
+        try {
+            LoginService loginService=new LoginService();
+            loginService.checkExistence(user_name,user_password);
+            resp.sendRedirect("http://localhost:8082/users");
+            //add cookie here later
         }
-    */}
-
-
-    //will be changed later-- redirect to users servlet
+        catch(Exception e){
+            resp.sendRedirect("http://localhost:8082/login");
+        }
+    }
 
 }

@@ -11,6 +11,7 @@ import java.util.List;
 
 public class DaoUserSql implements Dao<User> {
     private Connection connection;
+    private List<User> users;
 
 
     public DaoUserSql(Connection connection) {
@@ -34,18 +35,20 @@ public class DaoUserSql implements Dao<User> {
                     String password = resultSet.getString("password");
                     String ImgUrl = resultSet.getString("imgurl");
                     user = new User(id,userName,Name,Surname,password,ImgUrl);
+
                 }
             } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return user;
+
     }
 
 
 
     @Override
     public List<User> getAll() {
-        return null;
+        return users;
     }
 
     public User getByNickName(User item) {
@@ -64,6 +67,7 @@ public class DaoUserSql implements Dao<User> {
                 String password = resultSet.getString("password");
                 String photoUrl = resultSet.getString("imgUrl");
                 user = new User(id, nickName, name, surname, password, photoUrl);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,6 +78,7 @@ public class DaoUserSql implements Dao<User> {
     @Override
     public void save(User item) {
         String SQLI = "INSERT INTO users(id,username,name,password,imgurl) VALUES(?,?,?,?)";
+
 
 
     }
