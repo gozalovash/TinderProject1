@@ -1,5 +1,6 @@
 package servlets;
 
+import filters.LoginFilter;
 import service.Auth;
 
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ public class LoginServlet extends HttpServlet {
     /*public LoginServlet(Auth auth) {
         this.auth = auth;
     }*/
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
