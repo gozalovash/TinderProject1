@@ -7,6 +7,7 @@ import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import servlets.ChatServlet;
 import servlets.LikedServlet;
 import servlets.LoginServlet;
 import servlets.UsersServlet;
