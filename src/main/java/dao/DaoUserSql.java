@@ -20,8 +20,28 @@ public class DaoUserSql implements Dao<User> {
 
     @Override
     public User get(int id) {
-        return null;
+        User user = null;
+        String SQLS = "SELECT users.username , users.name , users.surname , users.password , users.imgurl WHERE id =?";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLS);
+                statement.setInt(1, id);
+                statement.execute();
+                ResultSet resultSet = statement.executeQuery();
+                while ((resultSet.next())){
+                  String userName = resultSet.getString("username");
+                    String Name = resultSet.getString("name");
+                    String Surname = resultSet.getString("surname");
+                    String password = resultSet.getString("password");
+                    String ImgUrl = resultSet.getString("imgurl");
+                    user = new User(id,userName,Name,Surname,password,ImgUrl);
+                }
+            } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return user;
     }
+
+
 
     @Override
     public List<User> getAll() {
@@ -53,6 +73,8 @@ public class DaoUserSql implements Dao<User> {
 
     @Override
     public void save(User item) {
+        String SQLI = "INSERT INTO users(id,username,name,password,imgurl) VALUES(?,?,?,?)";
+
 
     }
 
