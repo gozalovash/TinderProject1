@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 public class LoginFilter implements Filter {
     private UserService userService;
-    private FreeMarker freeMaker = new FreeMarker();
+    private FreeMarker freeMarker = new FreeMarker();
     private final Connection connection;
     HashMap<String, Object> userData = new HashMap<>();
 
@@ -54,7 +54,7 @@ public class LoginFilter implements Filter {
             }  catch (Exception e) {
                 userData.put("Information",e.getMessage());
                 userData.put("rout","login");
-                freeMaker.render("MAKE IT shams", userData,(HttpServletResponse) response );
+                freeMarker.render("content/login.html", userData,(HttpServletResponse) response );
             }
 
         }
