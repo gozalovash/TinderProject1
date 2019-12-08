@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign in</title>
 
-     <#include "css/bootstrap.min.css">
-     <#include "css/style.css">
+    <#include "css/bootstrap.min.css">
+    <#include "css/style.css">
 
 </head>
 <body>

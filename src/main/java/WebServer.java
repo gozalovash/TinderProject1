@@ -1,5 +1,6 @@
 import dbconnection.DbConnection;
 import filters.LoginFilter;
+import filters.RegistrationFilter;
 import org.apache.log4j.BasicConfigurator;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
@@ -7,10 +8,7 @@ import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import servlets.ChatServlet;
-import servlets.LikedServlet;
-import servlets.LoginServlet;
-import servlets.UsersServlet;
+import servlets.*;
 import utils.TemplateEngine;
 
 
@@ -25,13 +23,13 @@ public class WebServer {
         BasicConfigurator.configure();
         Server server = new Server(8082);
         ServletContextHandler handler = new ServletContextHandler();
-        handler.addServlet(LoginServlet.class, "/login/*");
+        handler.addServlet(new ServletHolder(new LoginServlet()), "/login/*");
         handler.addFilter(LoginFilter.class, "/login/*", EnumSet.of(DispatcherType.REQUEST));
         TemplateEngine te = new TemplateEngine("./content/");
         handler.addServlet(UsersServlet.class, "/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet()), "/liked/*");
         handler.addServlet(new ServletHolder(new ChatServlet()), "/chat/*");
-
+        handler.addServlet(new ServletHolder(new RegistrationServlet()),"/reg/*");
         //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
 
         //handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
@@ -40,7 +38,7 @@ public class WebServer {
         // handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
 
         //   HandlerCollection handlerCollection = new HandlerCollection();
-        /// handler.addFilter(new FilterHolder(new RegistrationFilter(connection)),"/reg/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
+        // handler.addFilter(new FilterHolder(new RegistrationFilter()),"/reg/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
         // handlerCollection.setHandlers(new Handler[] { handler});
         //  server.setHandler(handlerCollection);
 
