@@ -20,11 +20,7 @@ import java.util.EnumSet;
 
 public class WebServer {
     public static void main(String[] args) throws Exception {
-        //TODO have to solve problem at the end
-      //  SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
-               // SLF4J: Defaulting to no-operation (NOP) logger implementation
-      //  SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
-        Connection connection = new DbConnection().connection();
+    //    Connection connection = new DbConnection().connection();
         BasicConfigurator.configure();
         Server server = new Server(8082);
         ServletContextHandler handler = new ServletContextHandler();
@@ -41,7 +37,7 @@ public class WebServer {
 
         //   HandlerCollection handlerCollection = new HandlerCollection();
         /// handler.addFilter(new FilterHolder(new RegistrationFilter(connection)),"/reg/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
-        handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
+        //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
         // handlerCollection.setHandlers(new Handler[] { handler});
         //  server.setHandler(handlerCollection);
 
