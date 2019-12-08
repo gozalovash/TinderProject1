@@ -7,14 +7,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class DaoUserSql implements Dao<User> {
     private Connection connection;
+    private List<User> users;
+    public DaoUserSql(){
+        users=new LinkedList<>();
+
+    }
+
 
 
     public DaoUserSql(Connection connection) {
         this.connection = connection;
+        getByNickName()
     }
 
 
@@ -43,7 +51,7 @@ public class DaoUserSql implements Dao<User> {
 
     @Override
     public List<User> getAll() {
-        return null;
+        return users;
     }
 
     public User getByLogin(User item) {
@@ -93,14 +101,20 @@ public class DaoUserSql implements Dao<User> {
     @Override
     public void save(User item) {
         String SQLI = "INSERT INTO users(id,username,name,surname,password,imgurl) VALUES(?,?,?,?,?,?)";
+        User user=null;
+
         try {
             PreparedStatement statement = connection.prepareStatement(SQLI);
+            ResultSet resultSet = statement.executeQuery();
             statement.setInt(1, item.getUserId());
             statement.setString(2, item.getNickName());
             statement.setString(3, item.getUserName());
             statement.setString(4, item.getUserSurname());
             statement.setString(5, item.getPassword());
             statement.setString(6, item.getPhotoUrl());
+            user=new User(item.getUserId(),item.getNickName(),item.getUserName(),item.getUserSurname(),item.getPassword()
+            ,item.getPhotoUrl());
+            users.add(user);
 
         } catch (SQLException e) {
             e.printStackTrace();
