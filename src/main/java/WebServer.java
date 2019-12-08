@@ -20,24 +20,25 @@ import java.util.EnumSet;
 
 public class WebServer {
     public static void main(String[] args) throws Exception {
-    //    Connection connection = new DbConnection().connection();
+        //Connection connection = new DbConnection().connection();
         BasicConfigurator.configure();
         Server server = new Server(8082);
         ServletContextHandler handler = new ServletContextHandler();
-        handler.addServlet(UsersServlet.class, "/users/*");
         handler.addServlet(LoginServlet.class, "/login/*");
+        handler.addFilter(LoginFilter.class, "/login/*", EnumSet.of(DispatcherType.REQUEST));
+        handler.addServlet(UsersServlet.class, "/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet()), "/liked/*");
         handler.addServlet(new ServletHolder(new ChatServlet()), "/chat/*");
 
+        //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
 
         //handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
-       //  handler.addServlet(new ServletHolder(new LoginServlet(connection)), "/login/*");
+        //handler.addServlet(new ServletHolder(new LoginServlet()), "/login/*");
         // handler.addServlet(new ServletHolder(new LikedServlet(connection)), "/liked/*");
         // handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
 
         //   HandlerCollection handlerCollection = new HandlerCollection();
         /// handler.addFilter(new FilterHolder(new RegistrationFilter(connection)),"/reg/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
-        //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
         // handlerCollection.setHandlers(new Handler[] { handler});
         //  server.setHandler(handlerCollection);
 

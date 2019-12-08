@@ -16,6 +16,9 @@ public class UserService {
 
     public int getLogin(User user) {
         return daoUserSql.getByLogin(user).getUserId();
+    }
+    public boolean getByLogin(User user) {
+        return daoUserSql.getByLogin(user)!=null;
 
 
     }

@@ -40,6 +40,6 @@ public class FreeMarker {
 
     }
     public FreeMarker(){
-        this("content/user.html"); // to correct
+        this("./content"); // to correct
     }
 }

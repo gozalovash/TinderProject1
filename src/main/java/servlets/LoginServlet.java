@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
 
 public class LoginServlet extends HttpServlet {
     //private final Auth auth;
@@ -25,6 +26,11 @@ public class LoginServlet extends HttpServlet {
     }*/
     private CookiesService cookiesService;
     private UserService userService;
+   // private  Connection connection;
+
+  //  public LoginServlet(Connection connection) {
+        //this.connection =connection;
+   // }
 
 
     @Override
@@ -39,8 +45,6 @@ public class LoginServlet extends HttpServlet {
         String user_name = req.getParameter("user_name");
         String user_password = req.getParameter("user_password");
         User user = new User(user_name,user_password);
-
-
         cookiesService.saveCookies(userService.getLogin(user));
         //boolean checked = auth.check(user_name, user_password);
         //System.out.println(user_name);

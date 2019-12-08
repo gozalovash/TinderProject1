@@ -17,13 +17,13 @@ import java.util.HashMap;
 public class LoginFilter implements Filter {
     private UserService userService;
     private FreeMarker freeMarker = new FreeMarker();
-    private final Connection connection;
+  //  private final Connection connection;
     HashMap<String, Object> userData = new HashMap<>();
 
-    public LoginFilter(Connection connection) {
-        this.connection = connection;
-        this.userService = new UserService(new DaoUserSql(connection));
-    }
+   // public LoginFilter(Connection connection) {
+      //  this.connection = connection;
+       // this.userService = new UserService(new DaoUserSql(connection));
+  //  }
 
 
     @Override
@@ -43,7 +43,7 @@ public class LoginFilter implements Filter {
         if (HttpMethod.POST.name().equalsIgnoreCase(request1.getMethod())) {
             try {
                 FromRequest fromRequest = new FromRequest(request1);
-                String nickName = fromRequest.getParamString("Nickname");
+                String nickName = fromRequest.getParamString("nickname");
                 String password = fromRequest.getParamString("password");
                 User user = new User(nickName, password);
 
@@ -54,7 +54,7 @@ public class LoginFilter implements Filter {
             }  catch (Exception e) {
                 userData.put("Information",e.getMessage());
                 userData.put("rout","login");
-                freeMarker.render("content/login.html", userData,(HttpServletResponse) response );
+                freeMarker.render("this path was not right", userData,(HttpServletResponse) response );
             }
 
         }
