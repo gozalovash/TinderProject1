@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        cookiesService = new CookiesService(req,resp);
         String user_name = req.getParameter("user_name");
         String user_password = req.getParameter("user_password");
         User user = new User(user_name,user_password);

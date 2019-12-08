@@ -11,6 +11,7 @@ import servlets.ChatServlet;
 import servlets.LikedServlet;
 import servlets.LoginServlet;
 import servlets.UsersServlet;
+import utils.TemplateEngine;
 
 
 import javax.servlet.DispatcherType;
@@ -26,6 +27,7 @@ public class WebServer {
         ServletContextHandler handler = new ServletContextHandler();
         handler.addServlet(LoginServlet.class, "/login/*");
         handler.addFilter(LoginFilter.class, "/login/*", EnumSet.of(DispatcherType.REQUEST));
+        TemplateEngine te = new TemplateEngine("./content/");
         handler.addServlet(UsersServlet.class, "/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet()), "/liked/*");
         handler.addServlet(new ServletHolder(new ChatServlet()), "/chat/*");
