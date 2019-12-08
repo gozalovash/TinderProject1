@@ -25,4 +25,8 @@ public class UserService {
         User user = daoUserSql.getByLogin(check);
         return user!=null && user.getPassword().equals(check.getPassword());
     }
+    public void save(User item) {
+        daoUserSql.save(item);
+    }
+
 }
