@@ -22,7 +22,7 @@ public class DaoUserSql implements Dao<User> {
 
     public DaoUserSql(Connection connection) {
         this.connection = connection;
-        getByNickName()
+        //getByLogin(); Lala fix this
     }
 
 
