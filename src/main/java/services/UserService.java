@@ -15,12 +15,12 @@ public class UserService {
     }
 
     public int getLogin(User user) {
-        return daoUserSql.getByNickName(user).getUserId();
+        return daoUserSql.getByLogin(user).getUserId();
 
 
     }
     public boolean checkUsers(User check){
-        User user = daoUserSql.getByNickName(check);
+        User user = daoUserSql.getByLogin(check);
         return user!=null && user.getPassword().equals(check.getPassword());
     }
 }

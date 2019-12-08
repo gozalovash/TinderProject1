@@ -46,7 +46,7 @@ public class DaoUserSql implements Dao<User> {
         return null;
     }
 
-    public User getByNickName(User item) {
+    public User getByLogin(User item) {
         User user = null;
         String SQLS = "SELECT FROM users WHERE username = ?";
         try {

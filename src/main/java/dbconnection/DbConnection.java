@@ -5,27 +5,28 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbConnection {
-    private static final String dbUrl = "jdbc:postgresql://localhost:5432/......";
-    private static final String userName = "postgres";
-    private static final String password = "......";
+    private static final String dbUrl ="jdbc:postgres://ljnbtitm:wD1MAmn2Cndg1c6bYS3Nta0Jqxi9HnvK@isilo.db.elephantsql.com:5432/ljnbtitm";
+    private static final String userName ="ljnbtitm";
+    private static final String password ="wD1MAmn2Cndg1c6bYS3Nta0Jqxi9HnvK";
 
-    private static Connection connection;
+    public static Connection connection =null;
 
-    private DbConnection() {
+    private static Connection connect() throws SQLException {
+        return DriverManager.getConnection(dbUrl, userName, password);
     }
 
-    public static Connection getConnection() {
+
+    public Connection connection() {
         if (connection == null) {
             try {
-
-                connection = DriverManager.getConnection(dbUrl, userName, password);
-
+                connection = connect();
             } catch (SQLException e) {
-                throw new RuntimeException("Something went wrong during connection");
-
+                throw new IllegalStateException();
             }
         }
-        return connection;
+
+        return this.connection;
     }
+
 
 }
