@@ -35,7 +35,7 @@ public class FreeMarker {
             response.setCharacterEncoding(String.valueOf(StandardCharsets.UTF_8));
             configuration.getTemplate(templateFile).process(data,response.getWriter());
         } catch (IOException | TemplateException e) {
-            throw  new RuntimeException("Something went wrong , problem related with render");
+            throw  new RuntimeException("Something went wrong , problem related with render",e);
         }
 
     }
