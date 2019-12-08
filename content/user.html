@@ -23,17 +23,21 @@
             <div class="row">
                 <div class="col-12 col-lg-12 col-md-12 text-center">
                     <!--"https://robohash.org/68.186.255.198.png"-->
-                    <img src="${user.photoUrl}" alt="" class="mx-auto rounded-circle img-fluid">
-                    <h3 class="mb-0 text-truncated">${user.username}</h3>
+                    <img src="${photo}" alt="" class="mx-auto rounded-circle img-fluid">
+                    <h3 class="mb-0 text-truncated">${username}</h3>
                     <br>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <button onclick="location.href='content/user.html'"><span class="fa fa-times"></span> Dislike</button>
-                    <!--<button type="button" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span> Dislike</button>-->
+                    <form action="users" method="post">
+                        <input type="hidden" name="login" value="${login}" >
+                        <button type="submit" class="btn btn-outline-danger btn-block" name="choice" value="NO"><span class="fa fa-times"></span>Dislike</button>
+                    </form>
                 </div>
                 <div class="col-12 col-lg-6">
-                    <button onclick="location.href='content/user.html'"><span class="fa fa-times"></span> Like</button>
-                    <!--<button class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span> Like</button>-->
+                    <form action="users" method="post">
+                        <input type="hidden" name="login" value="${login}" >
+                        <button type="submit" class="btn btn-outline-success btn-block" name="choice" value="YES"><span class="fa fa-heart"></span>Like</button>
+                    </form>
                 </div>
                 <!--/col-->
             </div>

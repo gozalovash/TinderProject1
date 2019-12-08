@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
         Path path = Paths.get("./content/login.html");
         ServletOutputStream os = resp.getOutputStream();
         Files.copy(path, os);
+
     }
 
     @Override
@@ -47,9 +48,7 @@ public class LoginServlet extends HttpServlet {
         String user_password = req.getParameter("user_password");
         User user = new User(user_name,user_password);
         cookiesService.saveCookies(userService.getLogin(user));
-        //boolean checked = auth.check(user_name, user_password);
-        //System.out.println(user_name);
-      //  System.out.println(user_password);
+
 
         resp.sendRedirect("/users");  //does not need to localhost:8082
         /*try (PrintWriter w = resp.getWriter()) {
@@ -57,8 +56,5 @@ public class LoginServlet extends HttpServlet {
             w.printf("user:%s %s\n", user_name,user_password);
         }
     */}
-
-
-    //will be changed later-- redirect to users servlet
 
 }

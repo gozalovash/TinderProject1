@@ -59,6 +59,7 @@ public class DaoUserSql implements Dao<User> {
         String SQLS = "SELECT FROM users WHERE username = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLS);
+            assert false;
             stm.setString(1, user.getNickName());
             stm.execute();
             ResultSet resultSet = stm.executeQuery();

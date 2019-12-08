@@ -8,6 +8,9 @@ public class Like {
         this.likedUserId = likedUserId;
     }
 
+    public Like() {
+    }
+
     public Like(int userId, int likedUserId) {
         this.userId = userId;
         this.likedUserId = likedUserId;
