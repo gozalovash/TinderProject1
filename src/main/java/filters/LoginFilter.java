@@ -54,7 +54,7 @@ public class LoginFilter implements Filter {
             }  catch (Exception e) {
                 userData.put("Information",e.getMessage());
                 userData.put("rout","login");
-                freeMarker.render("this path was not right", userData,(HttpServletResponse) response );
+                freeMarker.render("fail.ftl", userData,(HttpServletResponse) response );
             }
 
         }
