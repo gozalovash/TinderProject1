@@ -49,6 +49,7 @@ public class LoginServlet extends HttpServlet {
 
         List<String> fields = new ArrayList<>();
         fields.add("Username");
+        fields.add("Password");
 
         data.put("fields", fields);
         data.put("message", "Please sign in");
