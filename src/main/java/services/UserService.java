@@ -10,6 +10,8 @@ public class UserService {
         this.daoUserSql = daoUserSql;
     }
 
+    public UserService() {this.daoUserSql = new DaoUserSql(); }
+
     public DaoUserSql getDaoUserSql() {
         return daoUserSql;
     }

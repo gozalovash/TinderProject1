@@ -16,7 +16,7 @@ import java.sql.Connection;
 import java.util.HashMap;
 
 public class LoginFilter implements Filter {
-    private UserService userService;
+    private UserService userService = new UserService();
     private FreeMarker freeMarker = new FreeMarker();
     TemplateEngine engine ;
 
@@ -48,8 +48,8 @@ public class LoginFilter implements Filter {
         if (HttpMethod.POST.name().equalsIgnoreCase(request1.getMethod())) {
             try {
                 FromRequest fromRequest = new FromRequest(request1);
-                String nickName = fromRequest.getParamString("nickname");
-                String password = fromRequest.getParamString("password");
+                String nickName = fromRequest.getParamString("Username");
+                String password = fromRequest.getParamString("Password");
                 User user = new User(nickName, password);
 
                 if (!userService.checkUsers(user)) {
@@ -57,9 +57,11 @@ public class LoginFilter implements Filter {
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 userData.put("Information", e.getMessage());
                 userData.put("rout", "login");
-                engine.render("fail.ftl", userData, (HttpServletResponse) response);
+                ((HttpServletResponse)response).sendRedirect("/login");
+//                engine.render("fail.ftl", userData, (HttpServletResponse) response);
             }
 
         } else {

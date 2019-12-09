@@ -19,11 +19,11 @@ import java.util.EnumSet;
 
 public class WebServer {
     public static void main(String[] args) throws Exception {
-        //Connection connection = new DbConnection().connection();
+        Connection connection = new DbConnection().connection();
         BasicConfigurator.configure();
         Server server = new Server(8082);
         ServletContextHandler handler = new ServletContextHandler();
-        handler.addServlet(new ServletHolder(new LoginServlet()), "/login/*");
+        handler.addServlet(new ServletHolder(new LoginServlet(connection)), "/login/*");
         handler.addFilter(LoginFilter.class, "/login/*", EnumSet.of(DispatcherType.REQUEST));
         TemplateEngine te = new TemplateEngine("./content/");
         handler.addServlet(UsersServlet.class, "/users/*");

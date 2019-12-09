@@ -24,7 +24,7 @@ public class DaoLikedSql implements Dao<Like> {
     @Override
     public Like get(int id) {
         Like like = null;
-        String SQLS = "SELECT FROM liked WHERE user_id = ? AND liked_uid = ?";
+        String SQLS = "SELECT * FROM liked WHERE user_id = ? AND liked_uid = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLS);
             stm.setInt(1, userId);
@@ -46,7 +46,7 @@ public class DaoLikedSql implements Dao<Like> {
     @Override
     public List<Like> getAll() {
         List<Like> likes = new ArrayList<>();
-        String SQLS = "SELECT FROM liked WHERE user_id=?";
+        String SQLS = "SELECT * FROM liked WHERE user_id=?";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLS);
             stm.setInt(1,userId);
@@ -66,7 +66,7 @@ public class DaoLikedSql implements Dao<Like> {
 
     @Override
     public void save(Like like) {
-        String SQLI = "INSERT INTO liked(user_id,liked_uid) VALUES (?,?)";
+        String SQLI = "INSERT * INTO liked(user_id,liked_uid) VALUES (?,?)";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLI);
             stm.setInt(1, userId);
@@ -80,7 +80,7 @@ public class DaoLikedSql implements Dao<Like> {
 
     @Override
     public void delete(int id) {
-        String SQLD = " DELETE FROM liked WHERE user_id=? AND liked_uid=?";
+        String SQLD = " DELETE * FROM liked WHERE user_id=? AND liked_uid=?";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLD);
             stm.setInt(1, userId);

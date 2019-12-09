@@ -32,12 +32,12 @@ public class LoginServlet extends HttpServlet {
     }*/
     private CookiesService cookiesService;
     FreeMarker freeMarker = new FreeMarker();
-    // private  Connection connection;
-    UserService userService;
+     private  Connection connection;
+    UserService userService = new UserService();
 
-    //  public LoginServlet(Connection connection) {
-    //this.connection =connection;
-    // }
+     public LoginServlet(Connection connection) {
+    this.connection =connection;
+    }
 
 
     @Override
@@ -63,8 +63,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         FromRequest request = new FromRequest(req);
         cookiesService = new CookiesService(req, resp);
-        String username = request.getParamString("username");
-        String userpassword = request.getParamString("userpassword");
+        String username = request.getParamString("Username");
+        String userpassword = request.getParamString("Password");
         User user = new User(username, userpassword);
         cookiesService.saveCookies(userService.getLogin(user));
         //boolean checked = auth.check(user_name, user_password);
