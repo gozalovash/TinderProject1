@@ -18,6 +18,9 @@ public class DaoLikedSql implements Dao<Like> {
         this.userId = userId;
     }
 
+    public DaoLikedSql() {
+    }
+
     @Override
     public Like get(int id) {
         Like like = null;

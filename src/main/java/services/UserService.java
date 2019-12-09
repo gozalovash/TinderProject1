@@ -20,7 +20,6 @@ public class UserService {
     public boolean getByLogin(User user) {
         return daoUserSql.getByLogin(user)!=null;
 
-
     }
     public boolean checkUsers(User check){
         User user = daoUserSql.getByLogin(check);
