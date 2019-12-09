@@ -24,7 +24,7 @@ public class WebServer {
         Server server = new Server(8082);
         ServletContextHandler handler = new ServletContextHandler();
         handler.addServlet(new ServletHolder(new LoginServlet(connection)), "/login/*");
-        handler.addFilter(LoginFilter.class, "/login/*", EnumSet.of(DispatcherType.REQUEST));
+        handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.REQUEST));
         TemplateEngine te = new TemplateEngine("./content/");
         handler.addServlet(UsersServlet.class, "/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet()), "/liked/*");

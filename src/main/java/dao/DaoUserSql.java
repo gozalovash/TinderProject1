@@ -60,9 +60,7 @@ public class DaoUserSql implements Dao<User> {
         String SQLS = "SELECT * FROM users WHERE username = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLS);
-            assert false;
             stm.setString(1, item.getNickName());
-            stm.execute();
             ResultSet resultSet = stm.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -71,11 +69,14 @@ public class DaoUserSql implements Dao<User> {
                 String surname = resultSet.getString("surname");
                 String password = resultSet.getString("password");
                 String photoUrl = resultSet.getString("imgUrl");
-                user = new User(id, nickName, name, surname, password, photoUrl);
+                user = new User(id,nickName,name,surname,password,photoUrl);
+                System.out.println("checking");
+                System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("checking2");
         return user;
     }
     public User getByUserId(User item) {

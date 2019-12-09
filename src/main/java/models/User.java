@@ -8,6 +8,10 @@ public class User {
     private String password;
     private String photoUrl;
 
+    public User(String password) {
+        this.password=password;
+    }
+
 
     public void setUserId(int userId) {
         this.userId = userId;
@@ -78,7 +82,7 @@ public class User {
     }
 
     public User(String nickName, String password) {
-        this.userName = nickName;
+        this.nickName = nickName;
         this.password = password;
     }
 

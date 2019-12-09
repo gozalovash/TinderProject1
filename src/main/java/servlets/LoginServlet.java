@@ -65,6 +65,7 @@ public class LoginServlet extends HttpServlet {
         cookiesService = new CookiesService(req, resp);
         String username = request.getParamString("Username");
         String userpassword = request.getParamString("Password");
+        System.out.printf("%s, %s",username, userpassword);
         User user = new User(username, userpassword);
         cookiesService.saveCookies(userService.getLogin(user));
         //boolean checked = auth.check(user_name, user_password);
