@@ -12,6 +12,15 @@ body {
     padding-bottom: 40px;
 }
 
+.form {
+    width: 300px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr 1fr auto auto ;
+    margin: 0 auto;
+
+}
+
 .form-signin {
     width: 100%;
     max-width: 330px;
