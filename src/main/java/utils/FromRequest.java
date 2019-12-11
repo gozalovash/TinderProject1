@@ -17,7 +17,7 @@ public class FromRequest {
     }
     public  String getParamString(String name){
         if(request.getParameter(name)==null || request.getParameter(name).equals("")){
-            throw new  IllegalStateException("GetParaneterFromRequest error");
+            throw new  IllegalStateException("GetParameterFromRequest error");
         }
         return request.getParameter(name);
     }

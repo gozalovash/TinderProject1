@@ -16,19 +16,16 @@ import java.sql.Connection;
 import java.util.HashMap;
 
 public class LoginFilter implements Filter {
-    private UserService userService;
+    private UserService userService = new UserService();
     private FreeMarker freeMarker = new FreeMarker();
     TemplateEngine engine ;
-
-    public LoginFilter() throws IOException {
-    }
-    //  private final Connection connection;
+     private final Connection connection;
 
 
-    // public LoginFilter(Connection connection) {
-    //  this.connection = connection;
-    // this.userService = new UserService(new DaoUserSql(connection));
-    //  }
+    public LoginFilter(Connection connection) {
+     this.connection = connection;
+    this.userService = new UserService(new DaoUserSql(connection));
+     }
 
 
     @Override
@@ -48,19 +45,26 @@ public class LoginFilter implements Filter {
         if (HttpMethod.POST.name().equalsIgnoreCase(request1.getMethod())) {
             try {
                 FromRequest fromRequest = new FromRequest(request1);
-                String nickName = fromRequest.getParamString("nickname");
-                String password = fromRequest.getParamString("password");
+                String nickName = fromRequest.getParamString("Username");
+                String password = fromRequest.getParamString("Password");
+
+                System.out.printf("%s, %s",nickName,password);
                 User user = new User(nickName, password);
 
                 if (!userService.checkUsers(user)) {
-                    throw new Exception("Incorrect nickname or password");
+                    System.out.println(user);
+                    System.out.printf("%s, %s",nickName,password);
+                    throw new Exception("Incorrect username or password");
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 userData.put("Information", e.getMessage());
                 userData.put("rout", "login");
-                engine.render("fail.ftl", userData, (HttpServletResponse) response);
+                ((HttpServletResponse)response).sendRedirect("/login");
+//                engine.render("fail.ftl", userData, (HttpServletResponse) response);
             }
+            chain.doFilter(request,response);
 
         } else {
             chain.doFilter(request, response);

@@ -1,5 +1,6 @@
 package dao;
 
+import dbconnection.DbConnection;
 import models.User;
 
 import java.nio.file.Paths;
@@ -15,7 +16,7 @@ public class DaoUserSql implements Dao<User> {
     private List<User> users;
     public DaoUserSql(){
         users=new LinkedList<>();
-
+        this.connection = DbConnection.connection();
     }
 
 
@@ -56,12 +57,10 @@ public class DaoUserSql implements Dao<User> {
 
     public User getByLogin(User item) {
         User user = null;
-        String SQLS = "SELECT FROM users WHERE username = ?";
+        String SQLS = "SELECT * FROM users WHERE username = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLS);
-            assert false;
-            stm.setString(1, user.getNickName());
-            stm.execute();
+            stm.setString(1, item.getNickName());
             ResultSet resultSet = stm.executeQuery();
             if (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -70,16 +69,19 @@ public class DaoUserSql implements Dao<User> {
                 String surname = resultSet.getString("surname");
                 String password = resultSet.getString("password");
                 String photoUrl = resultSet.getString("imgUrl");
-                user = new User(id, nickName, name, surname, password, photoUrl);
+                user = new User(id,nickName,name,surname,password,photoUrl);
+                System.out.println("checking");
+                System.out.println(user);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        System.out.println("checking2");
         return user;
     }
     public User getByUserId(User item) {
         User user = null;
-        String SQLS = "SELECT FROM users WHERE id = ?";
+        String SQLS = "SELECT * FROM users WHERE id = ?";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLS);
             stm.setInt(1, user.getUserId());
@@ -101,7 +103,7 @@ public class DaoUserSql implements Dao<User> {
 
     @Override
     public void save(User item) {
-        String SQLI = "INSERT INTO users(id,username,name,surname,password,imgurl) VALUES(?,?,?,?,?,?)";
+        String SQLI = "INSERT * INTO users(id,username,name,surname,password,imgurl) VALUES(?,?,?,?,?,?)";
         User user=null;
 
         try {
