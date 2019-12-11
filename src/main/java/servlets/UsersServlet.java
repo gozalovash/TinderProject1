@@ -39,7 +39,7 @@ public class UsersServlet extends HttpServlet {
         Cookie[] cookies = req.getCookies();
         User user=userList.get(pos);
         stop=userList.size();
-        TemplateEngine engine = new TemplateEngine("./content");
+        TemplateEngine engine = new TemplateEngine("./content");//?
         HashMap<String, Object> data = new HashMap<>();
         data.put("id", user.getUserId());
         data.put("username", user.getNickName());
