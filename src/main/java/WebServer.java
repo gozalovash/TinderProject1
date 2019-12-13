@@ -31,12 +31,12 @@ public class WebServer {
         handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet()), "/liked/*");
         handler.addServlet(new ServletHolder(new ChatServlet()), "/chat/*");
+        // handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
         //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
 
         //handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
         //handler.addServlet(new ServletHolder(new LoginServlet()), "/login/*");
         // handler.addServlet(new ServletHolder(new LikedServlet(connection)), "/liked/*");
-        // handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
 
         //   HandlerCollection handlerCollection = new HandlerCollection();
         // handler.addFilter(new FilterHolder(new RegistrationFilter()),"/reg/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));

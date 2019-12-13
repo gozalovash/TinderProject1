@@ -61,7 +61,7 @@ public class RegistrationFilter implements Filter {
             } catch (Exception e) {
                 data.put("message", e.getMessage());
                 data.put("rout", "reg");
-                freeMarker.render("fail.ftl", data, (HttpServletResponse) response);
+               freeMarker.render("fail.ftl", data, (HttpServletResponse) response);
             }
         } else {
             chain.doFilter(request, response);

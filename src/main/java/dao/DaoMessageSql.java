@@ -52,7 +52,7 @@ public class DaoMessageSql implements Dao<Message> {
 
     @Override
     public void save(Message item) {
-        String SQLI = "INSERT  * INTO message(sender,receiver,content) VALUES(?,?,?)";
+        String SQLI = "INSERT INTO message(sender,receiver,content) VALUES(?,?,?)";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLI);
             stm.setInt(1, senderId);
