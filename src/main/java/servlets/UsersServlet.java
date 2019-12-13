@@ -42,9 +42,9 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cookie[] cookies = req.getCookies();
-        User user=userList.get(pos);
-        stop=userList.size();
-        TemplateEngine engine = new TemplateEngine("./content");
+        User user = userList.get(pos);
+        stop = userList.size();
+        TemplateEngine engine = new TemplateEngine("./content");//?
         HashMap<String, Object> data = new HashMap<>();
         data.put("id", user.getUserId());
         data.put("username", user.getNickName());
@@ -60,18 +60,20 @@ public class UsersServlet extends HttpServlet {
         resp.sendRedirect("./liked.html");
 
 
+
+        //resp.sendRedirect("http://localhost:8082/liked");
         Cookie[] cookies = req.getCookies();
 
         if (req.getParameter("choice").equals("YES")) {
             Like liked = new Like();
             DaoLikedSql likedDAO = new DaoLikedSql();
             //here is something I cant deal with
-            if (!likedDAO.getAll().contains(req.getParameter("login"))) {
-                liked.setUserId(Integer.parseInt(getLoginByCookie.getLogin(cookies)));
-                liked.setLikedUserId(Integer.parseInt(req.getParameter("login")));
-                likedDAO.save(liked);
-            }
+            //if (!likedDAO.getAll().contains(req.getParameter("login")))
+            liked.setUserId(Integer.parseInt(getLoginByCookie.getLogin(cookies)));
+            liked.setLikedUserId(Integer.parseInt(req.getParameter("login")));
+            likedDAO.save(liked);
         }
+
         while (pos < stop) {
             Map<String, Object> profile = new HashMap<>();
             User user;
