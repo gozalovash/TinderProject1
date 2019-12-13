@@ -103,21 +103,22 @@ public class DaoUserSql implements Dao<User> {
 
     @Override
     public void save(User item) {
-        String SQLI = "INSERT * INTO users(id,username,name,surname,password,imgurl) VALUES(?,?,?,?,?,?)";
+        String SQLI = "INSERT INTO users(username,name,surname,password,imgurl) VALUES(?,?,?,?,?)";
         User user=null;
 
         try {
             PreparedStatement statement = connection.prepareStatement(SQLI);
-            ResultSet resultSet = statement.executeQuery();
-            statement.setInt(1, item.getUserId());
-            statement.setString(2, item.getNickName());
-            statement.setString(3, item.getUserName());
-            statement.setString(4, item.getUserSurname());
-            statement.setString(5, item.getPassword());
-            statement.setString(6, item.getPhotoUrl());
-            user=new User(item.getUserId(),item.getNickName(),item.getUserName(),item.getUserSurname(),item.getPassword()
+         //   ResultSet resultSet = statement.executeQuery();
+            statement.setString(1, item.getNickName());
+            statement.setString(2, item.getUserName());
+            statement.setString(3, item.getUserSurname());
+            statement.setString(4, item.getPassword());
+            statement.setString(5, item.getPhotoUrl());
+            statement.execute();
+            user=new User(item.getNickName(),item.getUserName(),item.getUserSurname(),item.getPassword()
             ,item.getPhotoUrl());
             users.add(user);
+            System.out.println("save postgres");
 
         } catch (SQLException e) {
             e.printStackTrace();

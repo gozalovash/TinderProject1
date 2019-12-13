@@ -22,12 +22,15 @@ import java.util.List;
         private CookiesService cookiesService;
         private final FreeMarker freeMarker = new FreeMarker();
         private UserService userService;
-       // private final Connection connection;
 
-        //public RegistrationServlet(Connection connection) {
-            //this.connection = connection;
-            //this.userService = new UserService(new DaoUserSql(connection));
-      //  }
+
+
+         private final Connection connection;
+
+        public RegistrationServlet(Connection connection) {
+            this.connection = connection;
+            this.userService = new UserService(new DaoUserSql(connection));
+        }
 
         @Override
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,6 +43,7 @@ import java.util.List;
             fields.add("Name");
             fields.add("Surname");
             fields.add("Password");
+            fields.add("Url");
 
             data.put("fields", fields);
             data.put("message", "Please sign up");
@@ -57,9 +61,8 @@ import java.util.List;
             String nickname = fromRequest.getParamString("Username");
             String name = fromRequest.getParamString("Name");
             String surname = fromRequest.getParamString("Surname");
-            String login = fromRequest.getParamString("Email");
             String password = fromRequest.getParamString("Password");
-            String imgUrl = fromRequest.getParamString("ImgUrl");
+            String imgUrl = fromRequest.getParamString("Url");
 
             User user = new User(nickname,name,surname,password,imgUrl);
             userService.save(user);

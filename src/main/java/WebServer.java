@@ -25,11 +25,12 @@ public class WebServer {
         ServletContextHandler handler = new ServletContextHandler();
         handler.addServlet(new ServletHolder(new LoginServlet(connection)), "/login/*");
         handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.REQUEST));
+        handler.addServlet(new ServletHolder(new RegistrationServlet(connection)),"/reg/*");
+        handler.addFilter(new FilterHolder(new RegistrationFilter(connection)),"/reg/*",EnumSet.of(DispatcherType.REQUEST) );
         TemplateEngine te = new TemplateEngine("./content/");
-        handler.addServlet(UsersServlet.class, "/users/*");
+        handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet()), "/liked/*");
         handler.addServlet(new ServletHolder(new ChatServlet()), "/chat/*");
-        handler.addServlet(new ServletHolder(new RegistrationServlet()),"/reg/*");
         //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
 
         //handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
