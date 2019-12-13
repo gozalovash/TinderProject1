@@ -8,9 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sign in</title>
 
-    <#include "css/bootstrap.min.css">
-    <#include "css/style.css">
-
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 <div class="block">
