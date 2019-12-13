@@ -31,14 +31,14 @@ public class UsersServlet extends HttpServlet {
     GetLoginByCookie getLoginByCookie = new GetLoginByCookie();
     FreeMarkerByShams htmlFreeMarker = new FreeMarkerByShams();
     List<User> userList = userDAO.getAll();
-    int pos=0;
-    int stop=0;
+    int pos = 0;
+    int stop = 0;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cookie[] cookies = req.getCookies();
-        User user=userList.get(pos);
-        stop=userList.size();
+        User user = userList.get(pos);
+        stop = userList.size();
         TemplateEngine engine = new TemplateEngine("./content");//?
         HashMap<String, Object> data = new HashMap<>();
         data.put("id", user.getUserId());
@@ -51,22 +51,19 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        resp.sendRedirect("http://localhost:8082/liked");
-
-
+        //resp.sendRedirect("http://localhost:8082/liked");
         Cookie[] cookies = req.getCookies();
 
         if (req.getParameter("choice").equals("YES")) {
             Like liked = new Like();
             DaoLikedSql likedDAO = new DaoLikedSql();
             //here is something I cant deal with
-            if (!likedDAO.getAll().contains(req.getParameter("login"))) {
-                liked.setUserId(Integer.parseInt(getLoginByCookie.getLogin(cookies)));
-                liked.setLikedUserId(Integer.parseInt(req.getParameter("login")));
-                likedDAO.save(liked);
-            }
+            //if (!likedDAO.getAll().contains(req.getParameter("login")))
+            liked.setUserId(Integer.parseInt(getLoginByCookie.getLogin(cookies)));
+            liked.setLikedUserId(Integer.parseInt(req.getParameter("login")));
+            likedDAO.save(liked);
         }
+
         while (pos < stop) {
             Map<String, Object> profile = new HashMap<>();
             User user;
