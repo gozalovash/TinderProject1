@@ -52,7 +52,28 @@ public class DaoUserSql implements Dao<User> {
 
     @Override
     public List<User> getAll() {
+        User user = null;
+        String SQLS = "SELECT users.id , users.username , users.name , users.surname , users.imgurl FROM users";
+        try {
+            PreparedStatement statement = connection.prepareStatement(SQLS);
+
+            statement.execute();
+            ResultSet resultSet = statement.executeQuery();
+            while ((resultSet.next())) {
+                String userName = resultSet.getString("username");
+                String Name = resultSet.getString("name");
+                String Surname = resultSet.getString("surname");
+                String ImgUrl = resultSet.getString("imgurl");
+                int id = resultSet.getInt("id");
+                user = new User(id, userName, Name, Surname, ImgUrl);
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
         return users;
+
+
     }
 
     public User getByLogin(User item) {

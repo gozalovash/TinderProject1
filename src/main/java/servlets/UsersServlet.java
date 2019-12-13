@@ -49,7 +49,7 @@ public class UsersServlet extends HttpServlet {
         data.put("id", user.getUserId());
         data.put("username", user.getNickName());
         data.put("imgURL", user.getPhotoUrl());
-        engine.render("./content/user.html", data, resp);
+        engine.render("user.html", data, resp);
         //htmlFreeMarker.getHtmlPage(profile, resp, "like-page.html");
 
     }

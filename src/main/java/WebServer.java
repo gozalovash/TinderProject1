@@ -1,7 +1,6 @@
 import dbconnection.DbConnection;
 import filters.LoginFilter;
 import filters.RegistrationFilter;
-import org.apache.log4j.BasicConfigurator;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerCollection;
@@ -20,7 +19,6 @@ import java.util.EnumSet;
 public class WebServer {
     public static void main(String[] args) throws Exception {
         Connection connection = new DbConnection().connection();
-        BasicConfigurator.configure();
         Server server = new Server(8082);
         ServletContextHandler handler = new ServletContextHandler();
         handler.addServlet(new ServletHolder(new LoginServlet(connection)), "/login/*");
