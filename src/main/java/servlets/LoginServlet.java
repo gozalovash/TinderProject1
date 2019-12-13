@@ -42,11 +42,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //  Path path = Paths.get("./content/login.html");
-        // ServletOutputStream os = resp.getOutputStream();
-       // Files.copy(path, os);
         HashMap<String, Object> data = new HashMap<>();
-
         List<String> fields = new ArrayList<>();
         fields.add("Username");
         fields.add("Password");
@@ -68,19 +64,8 @@ public class LoginServlet extends HttpServlet {
         System.out.printf("%s, %s",username, userpassword);
         User user = new User(username, userpassword);
         cookiesService.saveCookies(userService.getLogin(user));
-        //boolean checked = auth.check(user_name, user_password);
-        //System.out.println(user_name);
-        //  System.out.println(user_password);
-
-        resp.sendRedirect("/users");  //does not need to localhost:8082
-        /*try (PrintWriter w = resp.getWriter()) {
-            w.println("LoginServlet.POST");
-            w.printf("user:%s %s\n", user_name,user_password);
-        }
-    */
+        resp.sendRedirect("/users");
     }
 
-
-    //will be changed later-- redirect to users servlet
 
 }

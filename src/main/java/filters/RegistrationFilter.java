@@ -43,19 +43,25 @@ public class RegistrationFilter implements Filter {
 
             try {
                 FromRequest fromRequest = new FromRequest(servletRequest);
-                String login = fromRequest.getParamString("Nickname");
-                fromRequest.getParamString("Username");
-                fromRequest.getParamString("Surname");
+                String login = fromRequest.getParamString("Username");
+                System.out.println("username");
+                String name = fromRequest.getParamString("Name");
+                System.out.println("name");
+                String surname = fromRequest.getParamString("Surname");
+                System.out.println("surname");
                 String password = fromRequest.getParamString("Password");
-                User user = new User(login, password);
+                System.out.println("password");
+                String url = fromRequest.getParamString("Url");
+                System.out.println("url");
+                User user = new User(login, name, surname, password, url);
                 if (userService.getByLogin(user)) {
                     throw new IllegalArgumentException("This user already exists");
                 }
                 chain.doFilter(request, response);
             } catch (Exception e) {
                 data.put("message", e.getMessage());
-                data.put("rout", "registration");
-                freeMarker.render("fail.tfl", data, (HttpServletResponse) response);
+                data.put("rout", "reg");
+                freeMarker.render("fail.ftl", data, (HttpServletResponse) response);
             }
         } else {
             chain.doFilter(request, response);

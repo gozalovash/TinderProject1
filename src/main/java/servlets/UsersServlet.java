@@ -33,6 +33,11 @@ public class UsersServlet extends HttpServlet {
     List<User> userList = userDAO.getAll();
     int pos=0;
     int stop=0;
+    private Connection connection;
+
+    public UsersServlet(Connection connection) {
+        this.connection=connection;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +49,7 @@ public class UsersServlet extends HttpServlet {
         data.put("id", user.getUserId());
         data.put("username", user.getNickName());
         data.put("imgURL", user.getPhotoUrl());
-        engine.render("content/user.html", data, resp);
+        engine.render("./content/user.html", data, resp);
         //htmlFreeMarker.getHtmlPage(profile, resp, "like-page.html");
 
     }
@@ -52,7 +57,7 @@ public class UsersServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.sendRedirect("http://localhost:8082/liked");
+        resp.sendRedirect("./liked.html");
 
 
         Cookie[] cookies = req.getCookies();
