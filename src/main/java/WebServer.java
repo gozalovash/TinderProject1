@@ -1,9 +1,7 @@
 import dbconnection.DbConnection;
 import filters.LoginFilter;
 import filters.RegistrationFilter;
-import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.HandlerCollection;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -28,7 +26,7 @@ public class WebServer {
         TemplateEngine te = new TemplateEngine("./content/");
         handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
         handler.addServlet(new ServletHolder(new LikedServlet()), "/liked/*");
-        handler.addServlet(new ServletHolder(new ChatServlet()), "/chat/*");
+        handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
         //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
 
         //handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");
