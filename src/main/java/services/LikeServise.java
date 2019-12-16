@@ -52,7 +52,9 @@ public class LikeServise {
     public void LikePage() {
         Map<String, Object> input = new HashMap<>();
         input.put("messages", 0);
+        System.out.println(getLikedUsers(likedSql.getAll()));
         input.put("users", getLikedUsers(likedSql.getAll()));
+        input.put("def","error");
         freemarker.render("people-list.ftl", input, response);
     }
     public void addToLikeTable(int dislikedUserId){
@@ -66,10 +68,10 @@ public class LikeServise {
 
     public User otherUsers(int otherUserId) {
         User otherUsers = daoUserSql.otherUser(otherUserId);
-        if(otherUsers == null){
-            likedSql.deleteLikeTable();
-            return otherUsers(otherUserId);
-        }
+//        if(otherUsers == null){
+//            likedSql.deleteLikeTable();
+//            return otherUsers(otherUserId);
+//        }
         return otherUsers;
 
 

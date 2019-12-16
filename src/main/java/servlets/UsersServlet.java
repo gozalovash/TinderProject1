@@ -49,7 +49,10 @@ public class UsersServlet extends HttpServlet {
         likeServise = new LikeServise(new DaoUserSql(connection), new DaoLikedSql(userId, connection));
 
         User user = likeServise.otherUsers(userId);
-
+        if(user == null){
+            resp.sendRedirect("/liked");
+            return;
+        }
         HashMap<String, Object> data = new HashMap<>();
 
         data.put("user", user);
@@ -71,7 +74,7 @@ public class UsersServlet extends HttpServlet {
         Like like = new Like(fromRequest.getParamInt("user_id"));
         if (req.getParameter("like") != null) {
             likeServise.addLike(like);
-            likeServise.addToLikeTable(fromRequest.getParamInt("user_id"));
+//            likeServise.addToLikeTable(fromRequest.getParamInt("user_id"));
         } else if (req.getParameter("dislike") != null) {
             likeServise.deleteLike(like);
             likeServise.addToLikeTable(fromRequest.getParamInt("user_id"));

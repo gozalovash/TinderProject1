@@ -53,15 +53,9 @@ public class MessageService {
        input.put("users", getLikedUsersList(likeDao.getAll()));
         freemarker.render("people-list.ftl", input, response);
     }
-    public List<Message> getMessages(int senderId, int receiverId) {
-        return messageDao.getAll().stream().filter(s -> s.getSenderId() == senderId).
-                filter(r -> r.getReceiverId() == receiverId).collect(Collectors.toList());
+    public void saveMessage(int senderId, int receiverId, String content) {
+        messageDao.save(new Message(senderId, receiverId, content));
     }
-
-    public void saveMessage(int senderId, int receiverId, String text) {
-        messageDao.save(new Message(senderId, receiverId, text));
-    }
-
     private List<Message> getMessages() {
         return messageDao.getAll().stream().filter(e -> e.getSenderId() == receiverId || e.getReceiverId() == receiverId).collect(Collectors.toList());
     }

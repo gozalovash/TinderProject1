@@ -30,7 +30,7 @@ public class DaoUserSql implements Dao<User> {
     @Override
     public User get(int id) {
         User user = null;
-        String SQLS = "SELECT FROM users.username , users.name , users.surname , users.imgurl WHERE id =?";
+        String SQLS = "SELECT users.username , users.name , users.surname , users.imgurl FROM users WHERE id =?";
         try {
             PreparedStatement statement = connection.prepareStatement(SQLS);
             statement.setInt(1, id);
@@ -90,6 +90,7 @@ public class DaoUserSql implements Dao<User> {
             ResultSet rSet = stm.executeQuery();
 
             if (rSet.next()) {
+
                 int id = rSet.getInt("id");
                 String login = rSet.getString("username");
                 String name = rSet.getString("name");

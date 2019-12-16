@@ -32,12 +32,12 @@
                                 <td width="10">
                                     <div class="avatar-img">
                                         <img alt="no img" class="img-circle"
-                                             src="${user.photoUrl}"/>  
+                                             src="${user.photoUrl!def}"/>  
                                     </div>
 
                                 </td>
                                 <td class="align-middle">
-                                    ${user.nickName} ${user.surname}
+                                    ${user.nickName} ${user.userSurname}
                                 </td>
                                 <td class="align-middle">
                                     You liked this user
