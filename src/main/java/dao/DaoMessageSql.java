@@ -1,6 +1,7 @@
 package dao;
 
 import models.Message;
+import models.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,8 +25,22 @@ public class DaoMessageSql implements Dao<Message> {
 
     @Override
     public Message get(int id) {
-        return null;
+        try {
+            java.lang.String sql = "SELECT * FROM message WHERE message_id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return new Message( resultSet.getInt("sender"), resultSet.getInt("receiver"), resultSet.getString("content"));
+            }
+            return null;
+
+        } catch (SQLException e) {
+            throw new IllegalStateException("Something went wrong");
+        }
+
     }
+
 
     @Override
     public List<Message> getAll() {
@@ -52,7 +67,7 @@ public class DaoMessageSql implements Dao<Message> {
 
     @Override
     public void save(Message item) {
-        String SQLI = "INSERT  * INTO message(sender,receiver,content) VALUES(?,?,?)";
+        String SQLI = "INSERT  INTO message(sender,receiver,content) VALUES(?,?,?)";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLI);
             stm.setInt(1, senderId);

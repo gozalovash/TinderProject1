@@ -27,17 +27,17 @@
                     <div class="table-container">
                         <table class="table-users table" border="0">
                             <tbody>
-                            <#list user as users>
+                            <#list users as user>
                             <tr>
                                 <td width="10">
                                     <div class="avatar-img">
                                         <img alt="no img" class="img-circle"
-                                             src="${users.photoUrl}"/>  
+                                             src="${user.photoUrl}"/>  
                                     </div>
 
                                 </td>
                                 <td class="align-middle">
-                                    ${users.nickName} ${users.surname}
+                                    ${user.nickName} ${user.surname}
                                 </td>
                                 <td class="align-middle">
                                     You liked this user
@@ -45,7 +45,7 @@
                                 <td class="align-middle">
                                 <#--Last Login:  6/10/2017<br><small class="text-muted">5 days ago</small>-->
                                     <form action="/message" method="get">
-                                        <input type="hidden" name="user" value="${users.userId}">
+                                        <input type="hidden" name="user" value="${user.userId}">
                                         <button style="cursor: pointer" type="submit">Send message</button>
                                     </form>
                                 </td>
@@ -73,7 +73,7 @@
                     <#--name-->
                     <div class="col-md-6 name pl-2">
                         <i class="fa fa-comment"></i>
-                        <h6 class="ml-1 mb-0">${counterpart.name} ${counterpart.surname}</h6>
+                        <h6 class="ml-1 mb-0">${receiverId.name} ${receiverId.surname}</h6>
                     </div>
                         <#--cross-->
                     <div class="col-md-6 options text-right pr-0">
@@ -98,21 +98,20 @@
                             <#if message.status == "sent">
                         <li class="send-msg float-right mb-2">
                             <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
-                                ${message.text}
+                                ${message.content}
                             </p>
-                            <span class="send-msg-time">${message.time}</span>
                         </li>
                             <#--receive message-->
                             <#else>
                         <li class="receive-msg float-left mb-2">
                             <div class="sender-img">
-                                <img src="${counterpart.imgUrl}" alt="photo" class="float-left">
+                                <img src="${receiverId.imgUrl}" alt="photo" class="float-left">
                             </div>
                             <div class="receive-msg-desc float-left ml-2">
                                 <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
-                                    ${message.text}
+                                    ${message.content}
                                 </p>
-                                <span class="receive-msg-time">${counterpart.name}, ${message.time}</span>
+                                <span> class="receive-msg-time">${receiverId.name}</span>
                             </div>
                         </li>
                             </#if>
@@ -127,7 +126,7 @@
                         <#--text-->
                         <form action="/message" method="post" class="col-md-11 pl-0">
                             <input name="text" style="width: 80%;" type="text" class="border-0" placeholder=" Send message"/>
-                            <input name="user" type="hidden" value="${counterpart.id}">
+                            <input name="user" type="hidden" value="${receiverId.id}">
                             <button id="send" style="cursor: pointer; position: absolute; right: 10px; top: 0; " type="submit">Send/Update</button>
                         </form>
                     </div>

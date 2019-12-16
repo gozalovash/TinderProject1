@@ -26,10 +26,11 @@ public class MessageServlet extends HttpServlet {
         cookiesService = new CookiesService(req, resp);
         int senderId = Integer.parseInt(cookiesService.getCookies().getValue());
         FromRequest fromRequest = new FromRequest(req);
-        String rec_str_id = req.getPathInfo().replace("/", "");
-        int receiverId = Integer.parseInt(rec_str_id);
+//        String rec_str_id = req.getPathInfo().replace("/", "");
+        int receiverId = fromRequest.getParamInt("user");
+                //Integer.parseInt(rec_str_id);
         MessageService messageService = new MessageService(senderId, receiverId, connection, req, resp);
-      //  messageService.
+        messageService.generateLikedPage();
 
     }
 
@@ -39,14 +40,18 @@ public class MessageServlet extends HttpServlet {
         int senderId = Integer.parseInt(cookiesService.getCookies().getValue());
         FromRequest fromRequest = new FromRequest(req);
         String rec_str_id = req.getPathInfo().replace("/", "");
-        int receiverId = Integer.parseInt(rec_str_id);
+        int receiverId = fromRequest.getParamInt("user");
+                //Integer.parseInt(rec_str_id);
 
         MessageService messagesService = new MessageService(senderId, receiverId, connection, req, resp);
         try {
-            String text = fromRequest.getParamString("text");
+            String text = fromRequest.getParamString("content");
             messagesService.saveMessage(senderId, receiverId, text);
         } catch (IllegalStateException e) {
             e.printStackTrace();
+        }
+        finally {
+            messagesService.generateLikedPage();
         }
     }
 }

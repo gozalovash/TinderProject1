@@ -96,15 +96,12 @@ public class DaoUserSql implements Dao<User> {
                 String surname = rSet.getString("surname");
                 String password = rSet.getString("password");
                 String imgurl = rSet.getString("imgurl");
-                System.out.println("liked and userss");
                 result = new User(id, login, password, name, surname, imgurl);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("SQL OTHER USERS METHOD");
-        System.out.println(result);
         return result;
 
     }

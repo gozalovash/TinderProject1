@@ -48,10 +48,10 @@ public class MessageService {
     public void generateLikedPage() {
         Map<String, Object> input = new HashMap<>();
         input.put("messages", 1);
-        input.put("counterpart", userDao.get(receiverId));
-       // input.put("messageList",getMessages());
-       // input.put("users", sentMessage(likeDao.getAll()));
-        freemarker.render("chat.ftl", input, response);
+        input.put("receiverId", userDao.get(receiverId));
+        input.put("messageList",getMessages());
+       input.put("users", getLikedUsersList(likeDao.getAll()));
+        freemarker.render("people-list.ftl", input, response);
     }
     public List<Message> getMessages(int senderId, int receiverId) {
         return messageDao.getAll().stream().filter(s -> s.getSenderId() == senderId).
@@ -62,12 +62,10 @@ public class MessageService {
         messageDao.save(new Message(senderId, receiverId, text));
     }
 
-    public List<Message> receivedMessage(int senderId) {
-        return messageDao.getAll().stream().filter(s -> s.getSenderId() == senderId).collect(Collectors.toList());
-
+    private List<Message> getMessages() {
+        return messageDao.getAll().stream().filter(e -> e.getSenderId() == receiverId || e.getReceiverId() == receiverId).collect(Collectors.toList());
     }
-
-    public List<Message> sentMessage(int receiverId) {
-        return messageDao.getAll().stream().filter(r -> r.getReceiverId() == receiverId).collect(Collectors.toList());
+    private List<User> getLikedUsersList(List<Like> likes) {
+        return likes.stream().map(e -> userDao.get(e.getLikedUserId())).collect(Collectors.toList());
     }
 }
