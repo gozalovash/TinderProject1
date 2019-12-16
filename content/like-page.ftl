@@ -24,19 +24,35 @@
                         <img  src=${user.photoUrl} class="mx-auto"" img-fluid rounded-circle>
                         <h3 class="mb-0 text-truncated">${user.userName}  ${user.userSurname}</h3>
                         <br>
-                    </div>
-                    <input type="hidden" name="user_id" value=${user.userId}>
-                    <div class="col-12 col-lg-6">
-                        <button name="dislike" type="submit" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span>
-                            Dislike
-                        </button>
-                    </div>
-                    <div class="col-12 col-lg-6">
+<#--                    </div>-->
+<#--                    <input type="hidden" name="user_id" value=${user.userId}>-->
+<#--                    <div class="col-12 col-lg-6">-->
+<#--                        <button name="dislike" type="submit" class="btn btn-outline-danger btn-block"><span class="fa fa-times"></span>-->
+<#--                            Dislike-->
+<#--                        </button>-->
+<#--                    </div>-->
+<#--                    <div class="col-12 col-lg-6">-->
 
-                        <button name="like" type="submit" class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span>
-                            Like
-                        </button>
-                    </div>
+<#--                        <button name="like" type="submit" class="btn btn-outline-success btn-block"><span class="fa fa-heart"></span>-->
+<#--                            Like-->
+<#--                        </button>-->
+<#--                    </div>-->
+                        <div class="col-12 col-lg-6">
+                            <form action="users" method="post">
+                                <input type="hidden" name="login" value="${user.userId}">
+                                <button type="submit" class="btn btn-outline-danger btn-block" name="choice" value="NO"><span
+                                            class="fa fa-times"></span>Dislike
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <form action="users" method="post">
+                                <input type="hidden" name="login" value="${user.userId}">
+                                <button type="submit" class="btn btn-outline-success btn-block" name="choice" value="YES"><span
+                                            class="fa fa-heart"></span>Like
+                                </button>
+                            </form>
+                        </div>
                     <!--/col-->
                 </div>
                 <!--/row-->
