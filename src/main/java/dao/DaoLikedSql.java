@@ -63,10 +63,31 @@ public class DaoLikedSql implements Dao<Like> {
         }
         return likes;
     }
+    public void deleteLikeTable(){
+        try {
+            String sql = "DELETE FROM liked WHERE user_id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            stm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void addToLikeTable (int checkedUserId){
+        try {
+            String sql = "INSERT INTO liked(user_id,liked_uid) VALUES (?,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, userId);
+            stm.setInt(2, checkedUserId);
+            stm.execute();
+        } catch (SQLException e) {
+           throw  new RuntimeException("error with like data");
+        }
+    }
 
     @Override
     public void save(Like like) {
-        String SQLI = "INSERT * INTO liked(user_id,liked_uid) VALUES (?,?)";
+        String SQLI = "INSERT  INTO liked(user_id,liked_uid) VALUES (?,?)";
         try {
             PreparedStatement stm = connection.prepareStatement(SQLI);
             stm.setInt(1, userId);

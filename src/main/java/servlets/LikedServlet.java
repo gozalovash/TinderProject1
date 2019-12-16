@@ -1,9 +1,11 @@
 package servlets;
 
+import cookies.CookiesService;
 import dao.DaoLikedSql;
 import dao.DaoUserSql;
 import models.Like;
 import models.User;
+import services.LikeServise;
 import utils.FreeMarkerByShams;
 import utils.GetLoginByCookie;
 import utils.LikedUsers;
@@ -14,14 +16,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LikedServlet extends HttpServlet {
+    private Connection connection;
+    private CookiesService cookiesService;
+
+    public LikedServlet(Connection connection) {
+        this.connection = connection;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies();
+       /* Cookie[] cookies = req.getCookies();
         GetLoginByCookie getLoginByCookie = new GetLoginByCookie();
         DaoLikedSql likedDAO = new DaoLikedSql();
         DaoUserSql userDAO = new DaoUserSql();
@@ -35,12 +45,16 @@ public class LikedServlet extends HttpServlet {
         profile.put("items", userList);
 
         htmlFreeMarker.getHtmlPage(profile, resp, "user.html");
-
+   */
+        cookiesService = new CookiesService(req, resp);
+        int userId = Integer.parseInt(cookiesService.getCookies().getValue());
+        LikeServise likesService = new LikeServise(userId, connection, resp, req);
+        likesService.LikePage();
     }
 
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //dont know yet
+        super.doGet(req, resp);
     }
 }

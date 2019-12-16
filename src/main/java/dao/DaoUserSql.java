@@ -75,6 +75,36 @@ public class DaoUserSql implements Dao<User> {
 
 
     }
+    public User otherUser(int userId) {
+        User result = null;
+
+        String SQLS = "SELECT * FROM users WHERE id!= ?";
+
+        try {
+            PreparedStatement stm = connection.prepareStatement(SQLS);
+            stm.setInt(1, userId);
+            ResultSet rSet = stm.executeQuery();
+
+            if (rSet.next()) {
+                int id = rSet.getInt("id");
+                String login = rSet.getString("username");
+                String name = rSet.getString("name");
+                String surname = rSet.getString("surname");
+                String password = rSet.getString("password");
+                String imgurl = rSet.getString("imgurl");
+                System.out.println("liked and userss");
+                result = new User(id, login, password, name, surname, imgurl);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("SQL OTHER USERS METHOD");
+        System.out.println(result);
+        return result;
+
+    }
+
 
     public User getByLogin(User item) {
         User user = null;
@@ -129,7 +159,6 @@ public class DaoUserSql implements Dao<User> {
 
         try {
             PreparedStatement statement = connection.prepareStatement(SQLI);
-         //   ResultSet resultSet = statement.executeQuery();
             statement.setString(1, item.getNickName());
             statement.setString(2, item.getUserName());
             statement.setString(3, item.getUserSurname());
@@ -160,7 +189,4 @@ public class DaoUserSql implements Dao<User> {
 
     }
 
-    public User getOtherUsers(int otherUserId) {
-        return  null;
-    }
 }

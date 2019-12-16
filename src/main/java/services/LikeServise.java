@@ -7,8 +7,11 @@ import models.User;
 import utils.FreeMarker;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LikeServise {
@@ -17,7 +20,7 @@ public class LikeServise {
     private DaoLikedSql likedSql;
     private Connection connection;
     private HttpServletRequest request;
-    private HttpServletRequest response;
+    private HttpServletResponse response;
     private FreeMarker freemarker = new FreeMarker();
 
     public LikeServise(DaoUserSql daoUserSql, DaoLikedSql likedSql) {
@@ -25,7 +28,7 @@ public class LikeServise {
         this.likedSql = likedSql;
     }
 
-    public LikeServise(int userId, Connection connection, HttpServletRequest response, HttpServletRequest request) {
+    public LikeServise(int userId, Connection connection, HttpServletResponse response, HttpServletRequest request) {
         this.userId = userId;
         this.connection = connection;
         this.response = response;
@@ -46,14 +49,29 @@ public class LikeServise {
         }
     }
 
+    public void LikePage() {
+        Map<String, Object> input = new HashMap<>();
+        input.put("messages", 0);
+        input.put("users", getLikedUsers(likedSql.getAll()));
+        freemarker.render("like-page.ftl", input, response);
+    }
+    public void addToLikeTable(int dislikedUserId){
+        likedSql.addToLikeTable(dislikedUserId);
+    }
+
     public List<User> getLikedUsers(List<Like> likes) {
         return likes.stream().map(l -> daoUserSql.get(l.getLikedUserId()))
                 .collect(Collectors.toList());
     }
-    public User otherUsers(int otherUserId){
-      User otherUsers =daoUserSql.getOtherUsers(otherUserId);
-      //implement
+
+    public User otherUsers(int otherUserId) {
+        User otherUsers = daoUserSql.otherUser(otherUserId);
+        if(otherUsers == null){
+            likedSql.deleteLikeTable();
+            return otherUsers(otherUserId);
+        }
         return otherUsers;
+
 
     }
 
