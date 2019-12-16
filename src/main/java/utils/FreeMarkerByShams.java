@@ -45,7 +45,7 @@ import java.util.Map;
 
         public void getHtmlPage(Map<String, Object> map, HttpServletResponse resp, String htmlFile) throws IOException {
             Configuration cfg = new Configuration(Configuration.VERSION_2_3_28);
-            cfg.setDirectoryForTemplateLoading(new File("./lib/html"));
+            cfg.setDirectoryForTemplateLoading(new File("./content"));
             cfg.setDefaultEncoding("UTF-8");
             cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
             cfg.setLogTemplateExceptions(false);
