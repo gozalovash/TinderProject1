@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
           integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <!-- Bootstrap core CSS -->
-    <#include "css/bootstrap.min.css">
-    <!-- Custom styles for this template -->
-    <#include "css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
@@ -28,17 +27,17 @@
                     <div class="table-container">
                         <table class="table-users table" border="0">
                             <tbody>
-                            <#list users as user>
+                            <#list user as users>
                             <tr>
                                 <td width="10">
                                     <div class="avatar-img">
                                         <img alt="no img" class="img-circle"
-                                             src="${user.imgUrl}"/>  
+                                             src="${users.photoUrl}"/>  
                                     </div>
 
                                 </td>
                                 <td class="align-middle">
-                                    ${user.name} ${user.surname}
+                                    ${users.nickName} ${users.surname}
                                 </td>
                                 <td class="align-middle">
                                     You liked this user
@@ -46,7 +45,7 @@
                                 <td class="align-middle">
                                 <#--Last Login:  6/10/2017<br><small class="text-muted">5 days ago</small>-->
                                     <form action="/message" method="get">
-                                        <input type="hidden" name="user" value="${user.id}">
+                                        <input type="hidden" name="user" value="${users.userId}">
                                         <button style="cursor: pointer" type="submit">Send message</button>
                                     </form>
                                 </td>

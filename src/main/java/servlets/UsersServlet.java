@@ -83,15 +83,15 @@ public class UsersServlet extends HttpServlet {
         }
 
         FromRequest fromRequest = new FromRequest(req);
-        //Like like = new Like(fromRequest.getParamInt("user_id"));
-        /*if (req.getParameter("like") != null) {
+        Like like = new Like(fromRequest.getParamInt("user_id"));
+        if (req.getParameter("like") != null) {
             likeServise.addLike(like);
             likeServise.addToLikeTable(fromRequest.getParamInt("user_id"));
         } else if (req.getParameter("dislike") != null) {
             likeServise.deleteLike(like);
             likeServise.addToLikeTable(fromRequest.getParamInt("user_id"));
-        }*/
-        while (pos < stop) {
+        }
+        /*while (pos < stop) {
             Map<String, Object> profile = new HashMap<>();
             User user;
             user = userList.get(pos);
@@ -99,9 +99,9 @@ public class UsersServlet extends HttpServlet {
             profile.put("user", user);
             /*profile.put("photo", user.getPhotoUrl());
             profile.put("login", user.getNickName());*/
-            pos++;
-            htmlFreeMarker.getHtmlPage(profile, resp, "like-page.ftl");
-        }
+           // pos++;
+            //htmlFreeMarker.getHtmlPage(profile, resp, "like-page.ftl");
+       // }/*
         doGet(req, resp);
     }
 

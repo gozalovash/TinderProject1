@@ -30,11 +30,11 @@ public class DaoUserSql implements Dao<User> {
     @Override
     public User get(int id) {
         User user = null;
-        String SQLS = "SELECT users.username , users.name , users.surname , users.imgurl WHERE id =?";
+        String SQLS = "SELECT FROM users.username , users.name , users.surname , users.imgurl WHERE id =?";
         try {
             PreparedStatement statement = connection.prepareStatement(SQLS);
             statement.setInt(1, id);
-            statement.execute();
+           // statement.execute();
             ResultSet resultSet = statement.executeQuery();
             while ((resultSet.next())) {
                 String userName = resultSet.getString("username");
@@ -78,11 +78,15 @@ public class DaoUserSql implements Dao<User> {
     public User otherUser(int userId) {
         User result = null;
 
-        String SQLS = "SELECT * FROM users WHERE id!= ?";
+        String SQLS = "SELECT * FROM users WHERE id != ? AND id NOT IN (\n" +
+                "    SELECT liked_uid FROM liked WHERE liked_uid = id AND user_id = ? \n" +
+                ") LIMIT 1";
+
 
         try {
             PreparedStatement stm = connection.prepareStatement(SQLS);
             stm.setInt(1, userId);
+            stm.setInt(2,userId);
             ResultSet rSet = stm.executeQuery();
 
             if (rSet.next()) {

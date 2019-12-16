@@ -53,7 +53,7 @@ public class LikeServise {
         Map<String, Object> input = new HashMap<>();
         input.put("messages", 0);
         input.put("users", getLikedUsers(likedSql.getAll()));
-        freemarker.render("like-page.ftl", input, response);
+        freemarker.render("people-list.ftl", input, response);
     }
     public void addToLikeTable(int dislikedUserId){
         likedSql.addToLikeTable(dislikedUserId);
