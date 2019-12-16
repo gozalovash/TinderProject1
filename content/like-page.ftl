@@ -21,7 +21,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-lg-12 col-md-12 text-center">
-                        <img  src=${user.photoUrl} class="mx-auto"" img-fluid rounded-circle>
+                        <img  src=${user.photoUrl} class="mx-auto"" img-fluid rounded-circle style="width:450px;height:300px;">
                         <h3 class="mb-0 text-truncated">${user.userName}  ${user.userSurname}</h3>
                         <br>
                     </div>
