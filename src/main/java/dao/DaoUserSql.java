@@ -96,7 +96,7 @@ public class DaoUserSql implements Dao<User> {
                 String surname = rSet.getString("surname");
                 String password = rSet.getString("password");
                 String imgurl = rSet.getString("imgurl");
-                result = new User(id, login, password, name, surname, imgurl);
+                result = new User(id, login, name, surname,password,imgurl);
             }
 
         } catch (SQLException e) {
