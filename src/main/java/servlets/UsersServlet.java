@@ -44,7 +44,7 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-     cookiesService = new CookiesService(req,resp);
+     /*cookiesService = new CookiesService(req,resp);
      int userId = Integer.parseInt(cookiesService.getCookies().getValue());
         likeServise = new LikeServise(new DaoUserSql(connection), new DaoLikedSql(userId,connection));
 
@@ -55,12 +55,12 @@ public class UsersServlet extends HttpServlet {
         data.put("user", user);
 
         System.out.println("userrrrrrrrrrrrrr" + user);
-        freeMarker.render("like-page.ftl", data, resp);
+        freeMarker.render("like-page.ftl", data, resp);*/
 
 
 
 
-       /* Cookie[] cookies = req.getCookies();
+       Cookie[] cookies = req.getCookies();
         User user = userList.get(pos);
         stop = userList.size();
         TemplateEngine engine = new TemplateEngine("./content");//?
@@ -70,7 +70,7 @@ public class UsersServlet extends HttpServlet {
         data.put("imgURL", user.getPhotoUrl());
         engine.render("user.html", data, resp);
         //htmlFreeMarker.getHtmlPage(profile, resp, "like-page.html");
-*/
+
     }
 
     @Override
@@ -82,7 +82,7 @@ public class UsersServlet extends HttpServlet {
             likeServise = new LikeServise(new DaoUserSql(connection), new DaoLikedSql(activeUserId,connection));
         }
 
-        FromRequest fromRequest = new FromRequest(req);
+        //FromRequest fromRequest = new FromRequest(req);
         //Like like = new Like(fromRequest.getParamInt("user_id"));
         /*if (req.getParameter("like") != null) {
             likeServise.addLike(like);
@@ -91,15 +91,25 @@ public class UsersServlet extends HttpServlet {
             likeServise.deleteLike(like);
             likeServise.addToLikeTable(fromRequest.getParamInt("user_id"));
         }*/
+        Cookie[] cookies = req.getCookies();
+
+
         while (pos < stop) {
             Map<String, Object> profile = new HashMap<>();
             User user;
             user = userList.get(pos);
 
             profile.put("user", user);
-            /*profile.put("photo", user.getPhotoUrl());
-            profile.put("login", user.getNickName());*/
             pos++;
+            if (req.getParameter("choice").equals("YES")) {
+                Like liked = new Like();
+                DaoLikedSql likedDAO = new DaoLikedSql();
+                //here is something I cant deal with
+                //if (!likedDAO.getAll().contains(req.getParameter("login")))
+                liked.setUserId(Integer.parseInt(getLoginByCookie.getLogin(cookies)));
+                liked.setLikedUserId(Integer.parseInt(req.getParameter("login")));
+                likedDAO.save(liked);
+            }
             htmlFreeMarker.getHtmlPage(profile, resp, "like-page.ftl");
         }
         doGet(req, resp);
