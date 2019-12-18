@@ -17,6 +17,7 @@ public class MessageServlet extends HttpServlet {
     private CookiesService cookiesService;
     FreeMarker freeMarker = new FreeMarker();
 
+
     public MessageServlet(Connection connection) {
         this.connection = connection;
     }
@@ -39,13 +40,12 @@ public class MessageServlet extends HttpServlet {
         cookiesService = new CookiesService(req, resp);
         int senderId = Integer.parseInt(cookiesService.getCookies().getValue());
         FromRequest fromRequest = new FromRequest(req);
-        String rec_str_id = req.getPathInfo().replace("/", "");
+        //String rec_str_id = req.getPathInfo().replace("/", "");
         int receiverId = fromRequest.getParamInt("user");
                 //Integer.parseInt(rec_str_id);
-
         MessageService messagesService = new MessageService(senderId, receiverId, connection, req, resp);
         try {
-            String text = fromRequest.getParamString("content");
+            String text = fromRequest.getParamString("message");
             messagesService.saveMessage(senderId, receiverId, text);
         } catch (IllegalStateException e) {
             e.printStackTrace();
