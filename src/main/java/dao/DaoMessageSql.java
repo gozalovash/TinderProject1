@@ -44,11 +44,11 @@ public class DaoMessageSql implements Dao<Message> {
     @Override
     public List<Message> getAll() {
         List<Message> messageList = new ArrayList<>();
-        String SQLS = "SELECT * FROM message WHERE sender = ? AND receiver = ?";
+        String SQLS = "SELECT * FROM message WHERE sender = ? ";
         try {
             PreparedStatement statement = connection.prepareStatement(SQLS);
             statement.setInt(1, senderId);
-            statement.setInt(2, senderId);
+           // statement.setInt(2, senderId);
             ResultSet resultSet = statement.executeQuery();
             while ((resultSet.next())) {
                 String history = resultSet.getInt("receiver") == senderId ? "received" : "sent";
