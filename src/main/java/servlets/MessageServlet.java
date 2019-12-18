@@ -50,9 +50,10 @@ public class MessageServlet extends HttpServlet {
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
-        finally {
-            messagesService.generateLikedPage();
-        }
+        /*finally {
+
+        }*/
+        messagesService.generateLikedPage();
     }
 }
 
