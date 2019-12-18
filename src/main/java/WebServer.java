@@ -29,6 +29,7 @@ public class WebServer {
         handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/message");
         handler.addServlet(new ServletHolder(new LikedServlet(connection)), "/liked");
         handler.addServlet(new ServletHolder(new MessageServlet(connection)), "/chat/*");
+        handler.addServlet(new ServletHolder(new LoadResource()), "/static/*");
         //handler.addFilter(new FilterHolder(new LoginFilter(connection)),"/login/*", EnumSet.of(DispatcherType.INCLUDE,DispatcherType.REQUEST));
 
         //handler.addServlet(new ServletHolder(new UsersServlet(connection)), "/users/*");

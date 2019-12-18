@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -27,10 +26,11 @@
             <div class="col-md-12 chat-header">
                 <div class="row header-one text-white p-1">
                     <div class="col-md-6 name pl-2">
-<#--                        <i class="fa fa-comment"></i>-->
+                        <#--                        <i class="fa fa-comment"></i>-->
                         <h6 class="ml-1 mb-0">
 
-                            <img  src=${receiverId.photoUrl} class="mx-auto"" img-fluid rounded-circle style="width:150px;height:100px;">
+                            <img src=${receiverId.photoUrl} class="mx-auto"" img-fluid rounded-circle
+                                 style="width:150px;height:100px;">
                             <br>
                             <strong>${receiverId.userName}</strong>
                         </h6>
@@ -43,9 +43,26 @@
                 <div class="col-md-12 chats pt-3 pl-2 pr-3 pb-3">
                     <ul>
                         <#list messages as message>
-
-                        ${message}
-                    </#list>
+                            <#if message.receiverId != receiverId.userId>
+                                <li class="send-msg float-right mb-2">
+                                    <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
+                                        ${message.text}
+                                    </p>
+                                </li>
+                            <#else>
+                                <li class="receive-msg float-left mb-2">
+                                    <div class="sender-img">
+                                        <img src="http://nicesnippets.com/demo/image1.jpg" class="float-left">
+                                    </div>
+                                    <div class="receive-msg-desc float-left ml-2">
+                                        <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
+                                            ${message.text}
+                                        </p>
+<#--                                        <span class="receive-msg-time">ketty, Jan 25, 6:20 PM</span>-->
+                                    </div>
+                                </li>
+                            </#if>
+                        </#list>
                     </ul>
                 </div>
                 <div class="col-md-12 p-2 msg-box border border-primary">

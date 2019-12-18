@@ -37,7 +37,7 @@ public class MessageService {
         this.senderID = senderId;
         this.receiverId = receiverId;
         this.connection = connection;
-        this.messageDao = new DaoMessageSql(connection, senderId);
+        this.messageDao = new DaoMessageSql(connection, senderId,receiverId);
         this.userDao = new DaoUserSql(connection);
         this.likeDao = new DaoLikedSql(senderId, connection);
         this.request = req;

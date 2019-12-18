@@ -12,15 +12,16 @@ import java.util.List;
 
 public class DaoMessageSql implements Dao<Message> {
     private Connection connection;
-    private int senderId;
+    private int senderId,receiverId;
 
     public DaoMessageSql(Connection connection) {
         this.connection = connection;
     }
 
-    public DaoMessageSql(Connection connection, int senderId) {
+    public DaoMessageSql(Connection connection, int senderId,int receiverId) {
         this.connection = connection;
         this.senderId = senderId;
+        this.receiverId = receiverId;
     }
 
     @Override
@@ -44,11 +45,14 @@ public class DaoMessageSql implements Dao<Message> {
     @Override
     public List<Message> getAll() {
         List<Message> messageList = new ArrayList<>();
-        String SQLS = "SELECT * FROM message WHERE sender = ? ";
+        String SQLS = "SELECT * FROM message WHERE (sender = ? AND  receiver = ? )OR (receiver = ? AND  sender = ? )";
         try {
             PreparedStatement statement = connection.prepareStatement(SQLS);
+            System.out.println(senderId);
             statement.setInt(1, senderId);
-           // statement.setInt(2, senderId);
+            statement.setInt(2, receiverId);
+            statement.setInt(3, senderId);
+            statement.setInt(4, receiverId);
             ResultSet resultSet = statement.executeQuery();
             while ((resultSet.next())) {
                 String history = resultSet.getInt("receiver") == senderId ? "received" : "sent";
