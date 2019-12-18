@@ -29,7 +29,7 @@
                     <div class="col-md-6 name pl-2">
                         <i class="fa fa-comment"></i>
                         <h6 class="ml-1 mb-0">
-                            ${userTo}
+                            ${receiverId.userId}
                         </h6>
                     </div>
                     <div class="col-md-6 options text-right pr-0">

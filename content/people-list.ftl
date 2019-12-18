@@ -103,13 +103,13 @@
                             <#else>
                         <li class="receive-msg float-left mb-2">
                             <div class="sender-img">
-                                <img src="${receiverId.imgUrl}" alt="photo" class="float-left">
+                                <img src="${receiverId.photoUrl}" alt="photo" class="float-left">
                             </div>
                             <div class="receive-msg-desc float-left ml-2">
                                 <p class="bg-white m-0 pt-1 pb-1 pl-2 pr-2 rounded">
-                                    ${message.content}
+                                    ${message.text}
                                 </p>
-                                <span> class="receive-msg-time">${receiverId.name}</span>
+                                <span> class="receive-msg-time">${receiverId.userName}</span>
                             </div>
                         </li>
                             </#if>

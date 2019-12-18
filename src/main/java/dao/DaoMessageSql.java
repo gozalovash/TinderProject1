@@ -38,14 +38,13 @@ public class DaoMessageSql implements Dao<Message> {
         } catch (SQLException e) {
             throw new IllegalStateException("Something went wrong");
         }
-
     }
 
 
     @Override
     public List<Message> getAll() {
         List<Message> messageList = new ArrayList<>();
-        String SQLS = "SELECT * FROM message WHERE sender = ? AND receiver = ? ORDER BY TIME";
+        String SQLS = "SELECT * FROM message WHERE sender = ? AND receiver = ?";
         try {
             PreparedStatement statement = connection.prepareStatement(SQLS);
             statement.setInt(1, senderId);
@@ -58,10 +57,8 @@ public class DaoMessageSql implements Dao<Message> {
                         resultSet.getString("content")));
             }
             return messageList;
-
         } catch (SQLException e) {
-
-            throw new IllegalStateException("Something went wrong");
+            throw new IllegalStateException("Something went wrong in get all");
         }
     }
 
