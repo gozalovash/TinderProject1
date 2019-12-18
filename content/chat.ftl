@@ -43,7 +43,7 @@
                 <div class="col-md-12 chats pt-3 pl-2 pr-3 pb-3">
                     <ul>
                         <#list messages as message>
-                            <#if message.receiverId != receiverId.userId>
+                            <#if message.receiverId = receiverId.userId>
                                 <li class="send-msg float-right mb-2">
                                     <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
                                         ${message.text}
@@ -52,7 +52,7 @@
                             <#else>
                                 <li class="receive-msg float-left mb-2">
                                     <div class="sender-img">
-                                        <img src="http://nicesnippets.com/demo/image1.jpg" class="float-left">
+                                        <img src="${receiverId.photoUrl}" class="float-left">
                                     </div>
                                     <div class="receive-msg-desc float-left ml-2">
                                         <p class="pt-1 pb-1 pl-2 pr-2 m-0 rounded">
