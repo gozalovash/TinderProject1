@@ -31,13 +31,11 @@
                             <tr>
                                 <td width="10">
                                     <div class="avatar-img">
-                                        <img alt="no img" class="img-circle"
-                                             src="${user.photoUrl!def}"/>  
+                                        <img src="${user.photoUrl}"alt="no img" class="img-circle" style="width:450px;height:300px;"/>  
                                     </div>
-
                                 </td>
                                 <td class="align-middle">
-                                    ${user.nickName} ${user.userSurname}
+                                    ${user.userName} ${user.userSurname}
                                 </td>
                                 <td class="align-middle">
                                     You liked this user
